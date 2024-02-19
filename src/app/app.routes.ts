@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { ContentNotFoundComponent } from './content-not-found/content-not-found.component';
+import { ContentNotFoundComponent } from './shared/content-not-found/content-not-found.component';
 import { TaskOverviewComponent } from './features/task-overview/task-overview.component';
 import { TaskDashboardComponent } from './features/task-dashboard/task-dashboard.component';
 
