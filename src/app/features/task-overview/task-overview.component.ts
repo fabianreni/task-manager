@@ -11,6 +11,7 @@ import { Task } from '../services/task.model';
 import { TaskManagementService } from '../services/task-management.service';
 import { EditTaskDialogComponent } from '../edit-task-dialog/edit-task-dialog.component';
 import { DeleteTaskDialogComponent } from '../delete-task-dialog/delete-task-dialog.component';
+import { ViewTaskDialogComponent } from '../view-task-dialog/view-task-dialog.component';
 
 @Component({
   selector: 'app-task-overview',
@@ -46,6 +47,14 @@ export class TaskOverviewComponent {
 
   openEditDialog(task: Task): void {
     this.dialog.open(EditTaskDialogComponent,
+      {
+        data: task.id
+      }
+    );
+  }
+
+  openDetailDialog(task: Task): void {
+    this.dialog.open(ViewTaskDialogComponent,
       {
         data: task.id
       }
