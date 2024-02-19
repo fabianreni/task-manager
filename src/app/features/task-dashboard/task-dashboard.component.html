@@ -2,19 +2,42 @@
     <h1 class="text-xl font-bold">
         Task dashboard</h1>
 </div>
+<div class="flex  h-full">
+    <div class="w-1/2">
+        <div class="w-96 bg-gray-100 rounded-md p-4 shadow-md">
+            <div class="flex items-center mb-4">
+                <div class="w-1/2">Total Tasks</div>
+                <div class="w-1/2 text-right"> {{taskSummary().totalTasksCount}}</div>
+            </div>
+            <div class="h-2 bg-gray-800 rounded-lg"
+                [style.width.%]="(taskSummary().totalTasksCount/taskSummary().totalTasksCount) * 100"></div>
 
-<div class="m-4 bg-white p-4 shadow-md">
-    <div>
-        Total tasks: {{taskSummary().totalTasksCount}}
-    </div>
+            <div class="flex items-center mb-4">
+                <div class="w-1/2">Created</div>
+                <div class="w-1/2 text-right">{{taskSummary().createdTasksCount}}</div>
+            </div>
+            <div class="w-full h-2 bg-gray-300 rounded-md">
+                <div class="h-2 bg-blue-500 rounded-lg"
+                    [style.width.%]="(taskSummary().createdTasksCount / taskSummary().totalTasksCount) * 100"></div>
+            </div>
 
-    <div>
-        Created: {{taskSummary().createdTasksCount}}
-    </div>
-    <div>
-        Pending: {{ taskSummary().pendingTasksCount }}
-    </div>
-    <div>
-        Completed: {{ taskSummary().completedTasksCount }}
+            <div class="flex items-center mb-4">
+                <div class="w-1/2">Pending</div>
+                <div class="w-1/2 text-right">{{ taskSummary().pendingTasksCount }}</div>
+            </div>
+            <div class="w-full h-2 bg-gray-300 rounded-md">
+                <div class="h-2 bg-yellow-500 rounded-lg"
+                    [style.width.%]="(taskSummary().pendingTasksCount / taskSummary().totalTasksCount) * 100"></div>
+            </div>
+
+            <div class="flex items-center mb-4">
+                <div class="w-1/2">Completed</div>
+                <div class="w-1/2 text-right"> {{ taskSummary().completedTasksCount }}</div>
+            </div>
+            <div class="w-full h-2 bg-gray-300 rounded-md">
+                <div class="h-2 bg-green-500 rounded-lg"
+                    [style.width.%]="(taskSummary().completedTasksCount / taskSummary().totalTasksCount) * 100"></div>
+            </div>
+        </div>
     </div>
 </div>

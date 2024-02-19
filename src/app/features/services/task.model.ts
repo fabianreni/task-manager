@@ -30,10 +30,10 @@ export class TaskSummary {
     completedTasksCount: number = 0;
 
     updateDashboard(tasks: Task[]): void {
-        this.createdTasksCount = tasks.length;
-        this.createdTasksCount = tasks.filter(task => task.status === 1).length;
-        this.pendingTasksCount = tasks.filter(task => task.status === 2).length;
-        this.completedTasksCount = tasks.filter(task => task.status === 3).length;
+        this.totalTasksCount = tasks.length;
+        this.createdTasksCount = tasks.filter(task => task.status == 1).length;
+        this.pendingTasksCount = tasks.filter(task => task.status == 2).length;
+        this.completedTasksCount = tasks.filter(task => task.status == 3).length;
     }
 }
 
