@@ -16,7 +16,7 @@ export class TaskDashboardService {
   }
 
   setTaskSummary(tasks: Task[]): void {
-    this.setTaskSummary(tasks);
+    this.taskSummary.updateDashboard(tasks);
     this.taskSummarySubject.next(this.taskSummary);
   }
 

@@ -45,12 +45,11 @@ export class EditTaskDialogComponent implements OnInit {
   private initializeTaskForm(): void {
     const task = this.taskManagementService.getTask(this.data);
     if (task === null) { return; }
-
-    this.task = task;
+    this.task = Object.assign({}, task)
     this.form = this.formBuilder.group({
-      title: this.task.title,
-      description: this.task.description,
-      status: this.task.status
+      title: task.title,
+      description: task.description,
+      status: task.status
     });
   }
 

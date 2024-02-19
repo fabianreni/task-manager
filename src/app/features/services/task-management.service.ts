@@ -39,13 +39,12 @@ export class TaskManagementService {
   }
 
   editTask(newTask: Task): void {
-    this.tasks.find(task => {
-      if (task.id === newTask.id) {
-        task = newTask;
-        this.tasksSubject.next(this.tasks);
-        this.setTaskSummary();
-      }
-    });
+    const index = this.tasks.findIndex(task => task.id === newTask.id);
+    if (index !== -1) {
+      this.tasks[index] = newTask;
+      this.tasksSubject.next(this.tasks);
+      this.setTaskSummary();
+    }
   }
 
   deleteTask(id: number): void {

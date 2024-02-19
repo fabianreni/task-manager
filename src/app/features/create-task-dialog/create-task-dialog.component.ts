@@ -28,7 +28,6 @@ export class CreateTaskDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.initializeTaskForm();
     this.initializeTaskStatuses();
   }
