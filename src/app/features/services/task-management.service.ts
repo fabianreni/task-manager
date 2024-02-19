@@ -8,10 +8,9 @@ import { Observable, ReplaySubject, Subject } from 'rxjs';
 export class TaskManagementService {
   tasks$: Observable<Task[]>;
   private tasks: Task[] = [];
-  private tasksSubject: Subject<Task[]>;
+  private tasksSubject: Subject<Task[]> = new ReplaySubject<Task[]>(1);;
 
   constructor() {
-    this.tasksSubject = new ReplaySubject<Task[]>(1);
     this.tasks$ = this.tasksSubject.asObservable();
   }
 
@@ -39,9 +38,9 @@ export class TaskManagementService {
     this.tasks.find(task => {
       if (task.id === newTask.id) {
         task = newTask;
+        this.tasksSubject.next(this.tasks);
       }
     });
-    this.tasksSubject.next(this.tasks);
   }
 
   deleteTask(id: number): void {
