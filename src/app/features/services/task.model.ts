@@ -22,3 +22,28 @@ export enum TaskStatus {
     Pending = 2,
     Completed = 3
 }
+
+export class TaskSummary {
+    totalTasksCount: number = 0;
+    createdTasksCount: number = 0;
+    pendingTasksCount: number = 0;
+    completedTasksCount: number = 0;
+
+    updateDashboard(tasks: Task[]): void {
+        this.createdTasksCount = tasks.length;
+        this.createdTasksCount = tasks.filter(task => task.status === 1).length;
+        this.pendingTasksCount = tasks.filter(task => task.status === 2).length;
+        this.completedTasksCount = tasks.filter(task => task.status === 3).length;
+    }
+}
+
+
+export class TaskStatusPresentation {
+    public id: TaskStatus;
+    public name: string;
+
+    constructor(id: TaskStatus, name: string) {
+        this.id = id;
+        this.name = name;
+    }
+}

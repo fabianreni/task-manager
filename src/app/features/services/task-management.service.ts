@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task.model';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { TaskDashboardService } from './task-dashboard.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +9,10 @@ import { Observable, ReplaySubject, Subject } from 'rxjs';
 export class TaskManagementService {
   tasks$: Observable<Task[]>;
   private tasks: Task[] = [];
-  private tasksSubject: Subject<Task[]> = new ReplaySubject<Task[]>(1);;
+  private tasksSubject: Subject<Task[]> = new ReplaySubject<Task[]>(1);
 
-  constructor() {
+  constructor(
+    private taskDashboardService: TaskDashboardService) {
     this.tasks$ = this.tasksSubject.asObservable();
   }
 
@@ -18,6 +20,8 @@ export class TaskManagementService {
     task.setId(this.tasks.length + 1);
     this.tasks.push(task);
     this.tasksSubject.next(this.tasks);
+    this.taskDashboardService.setTaskSummary(this.tasks);
+    this.setTaskSummary();
   }
 
   getTasks(): Observable<Task[]> {
@@ -39,6 +43,7 @@ export class TaskManagementService {
       if (task.id === newTask.id) {
         task = newTask;
         this.tasksSubject.next(this.tasks);
+        this.setTaskSummary();
       }
     });
   }
@@ -46,5 +51,10 @@ export class TaskManagementService {
   deleteTask(id: number): void {
     this.tasks = this.tasks.filter(task => task.id !== id);
     this.tasksSubject.next(this.tasks);
+    this.setTaskSummary();
+  }
+
+  private setTaskSummary(): void {
+    this.taskDashboardService.setTaskSummary(this.tasks);
   }
 }
