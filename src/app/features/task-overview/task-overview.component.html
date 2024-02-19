@@ -1,44 +1,58 @@
-<ng-container *ngIf="(tasks$ |async) as tasks; else noTasks">
+<div class="bg-gray-800 py-8 px-4 text-center text-white">
+    <h1 class="text-3xl font-bold">Task overview</h1>
+</div>
+<div class="m-4 bg-white p-4 shadow-md">
+    <button mat-icon-button (click)="openCreateDialog()">
+        <div class="flex items-center justify-center">
+            <mat-icon>add</mat-icon>
+            <span> Create task</span>
+        </div>
+    </button>
+    <ng-container *ngIf="(tasks$ |async) as tasks; else noTasks">
+        <table mat-table class="min-w-full bg-white shadow-md rounded" [dataSource]="tasks">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let task">{{ task.id }}</td>
+            </ng-container>
 
-    <table mat-table [dataSource]="tasks">
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef>ID</th>
-            <td mat-cell *matCellDef="let task">{{ task.id }}</td>
-        </ng-container>
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef>Title</th>
+                <td mat-cell *matCellDef="let task">{{ task.title }}</td>
+            </ng-container>
 
-        <ng-container matColumnDef="title">
-            <th mat-header-cell *matHeaderCellDef>Title</th>
-            <td mat-cell *matCellDef="let task">{{ task.title }}</td>
-        </ng-container>
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef>Description</th>
+                <td mat-cell *matCellDef="let task">{{ task.description }}</td>
+            </ng-container>
 
-        <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef>Description</th>
-            <td mat-cell *matCellDef="let task">{{ task.description }}</td>
-        </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let task">
+                    <button mat-icon-button (click)="openEditDialog(task)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
 
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>Actions</th>
-            <td mat-cell *matCellDef="let task">
-                <button mat-icon-button (click)="openEditDialog(task)">
-                    <mat-icon>edit</mat-icon>
-                </button>
+                    <button mat-icon-button (click)="openDetailDialog(task)">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
 
-                <button mat-icon-button (click)="openDetailDialog(task)">
-                    <mat-icon>visibility</mat-icon>
-                </button>
+                    <button mat-icon-button (click)="openDeleteDialog(task)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
 
-                <button mat-icon-button (click)="openDeleteDialog(task)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </td>
-        </ng-container>
+            <tr mat-header-row class="bg-gray-800 text-white"
+                *matHeaderRowDef="['id', 'title', 'description', 'actions']">
+            </tr>
+            <tr mat-row class="text-gray-700" *matRowDef="let row; columns: ['id', 'title', 'description', 'actions']">
+            </tr>
+        </table>
+    </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="['id', 'title', 'description', 'actions']"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['id', 'title', 'description', 'actions']"></tr>
-    </table>
-</ng-container>
-<ng-template #noTasks>
-    No tasks added, please create task
-</ng-template>
-
-<button (click)="openCreateDialog()"> Open</button>
+    <ng-template #noTasks>
+        <div class="flex items-center justify-center">
+            <span>No tasks added, please create task</span>
+        </div>
+    </ng-template>
+</div>
