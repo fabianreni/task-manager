@@ -1,0 +1,40 @@
+<ng-container *ngIf="(tasks$ |async) as tasks; else noTasks">
+
+    <table mat-table [dataSource]="tasks">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let task">{{ task.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let task">{{ task.title }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let task">{{ task.description }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let task">
+                <button mat-icon-button color="primary" (click)="openEditDialog(task)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" (click)="openDeleteDialog(task)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['id', 'title', 'description', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['id', 'title', 'description', 'actions']"></tr>
+    </table>
+</ng-container>
+<ng-template #noTasks>
+    No tasks added, please create task
+</ng-template>
+
+<button (click)="openCreateDialog()"> Open</button>

@@ -1,0 +1,28 @@
+<h1>Create task</h1>
+<form (ngSubmit)="onSubmit()" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div class="mb-4">
+        <label>Title</label>
+        <input type="text" name="title" [(ngModel)]="task.title" placeholder="Title" required>
+    </div>
+    <div class="mb-4">
+        <label>Description</label>
+        <input type="text" name="description" [(ngModel)]="task.description" placeholder="Description" required>
+    </div>
+
+    <div class="mb-4">
+        <label>Status</label>
+        <select name="status" [(ngModel)]="task.status" required>
+            <option value="">Select an option</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+    </div>
+    <div class="mb-6">
+        <button type="submit">Save</button>
+    </div>
+
+    <div class="mb-6">
+        <button type="button" (click)="onClose()">Close</button>
+    </div>
+</form>
