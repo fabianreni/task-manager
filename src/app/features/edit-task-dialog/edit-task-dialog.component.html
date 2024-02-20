@@ -2,34 +2,7 @@
     <div class="p-4 md:p-5">
         <h3 class="text-xl font-semibold">Edit task</h3>
     </div>
-    <div class="p-4 md:p-5 space-y-4">
-        <ng-container *ngIf="task">
-            <form (ngSubmit)="onSubmit()">
-                <div class="mb-4">
-                    <label>Title: </label>
-                    <input type="text" name="title" [(ngModel)]="task.title" placeholder="Title" required>
-                </div>
-                <div class="mb-4">
-                    <label>Description: </label>
-                    <input type="text" name="description" [(ngModel)]="task.description" placeholder="Description"
-                        required>
-                </div>
+    <app-create-and-edit-task-presentation [presentation]="taskPresentation"
+        (task)="onTaskChanged($event)"></app-create-and-edit-task-presentation>
 
-                <div class="mb-4">
-                    <label>Status: </label>
-                    <span>Status: </span>
-                    <select name="status" [(ngModel)]="task.status">
-                        <ng-container *ngFor="let status of taskStatuses">
-                            <option [value]="status.id">{{status.name}}</option>
-                        </ng-container>
-                    </select>
-                </div>
-
-                <div class="flex items-end justify-end p-4 md:p-5">
-                    <button type="button" (click)="onClose()">Close</button>
-                    <button type="submit" class="ml-4" [disabled]="form.invalid">Save</button>
-                </div>
-            </form>
-        </ng-container>
-    </div>
 </div>

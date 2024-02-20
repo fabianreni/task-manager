@@ -1,25 +1,25 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormsModule } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 
 import { CreateTaskDialogComponent } from '../create-task-dialog/create-task-dialog.component';
 import { TaskManagementService } from '../services/task-management.service';
-import { Task, TaskStatus, TaskStatusPresentation } from '../services/task.model';
+import { Task } from '../services/task.model';
+import { CreateAndEditTaskPresentation } from '../create-and-edit-task-presentation/create-and-edit-task-presentation.model';
+import { CreateAndEditTaskPresentationComponent } from '../create-and-edit-task-presentation/create-and-edit-task-presentation.component';
 
 @Component({
   selector: 'app-edit-task-dialog',
   standalone: true,
-  imports: [FormsModule,
-    CommonModule],
+  imports: [
+    CommonModule,
+    CreateAndEditTaskPresentationComponent],
   templateUrl: './edit-task-dialog.component.html',
   styleUrl: './edit-task-dialog.component.scss'
 })
 export class EditTaskDialogComponent implements OnInit {
-  task!: Task;
-  form!: FormGroup;
-
-  taskStatuses: TaskStatusPresentation[] = [];
+  taskPresentation!: CreateAndEditTaskPresentation;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: number,
@@ -30,34 +30,29 @@ export class EditTaskDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeTaskForm();
-    this.initializeTaskStatuses();
   }
 
-  onSubmit(): void {
-    this.taskManagementService.editTask(this.task);
+  onTaskChanged(task: Task | null): void {
+    if (task === null) {
+      this.onClose();
+      return;
+    }
+
+    this.onSubmit(task);
+  }
+
+  private onSubmit(task: Task): void {
+    this.taskManagementService.editTask(task);
     this.onClose();
   }
 
-  onClose(): void {
+  private onClose(): void {
     this.dialogRef.close();
   }
 
   private initializeTaskForm(): void {
     const task = this.taskManagementService.getTask(this.data);
     if (task === null) { return; }
-    this.task = Object.assign({}, task)
-    this.form = this.formBuilder.group({
-      title: task.title,
-      description: task.description,
-      status: task.status
-    });
-  }
-
-  private initializeTaskStatuses(): void {
-    const createStatus = new TaskStatusPresentation(TaskStatus.Created, 'Created');
-    const pendingStatus = new TaskStatusPresentation(TaskStatus.Pending, 'Pending');
-    const completedStatus = new TaskStatusPresentation(TaskStatus.Completed, 'Completed');
-
-    this.taskStatuses.push(createStatus, pendingStatus, completedStatus);
+    this.taskPresentation = new CreateAndEditTaskPresentation(this.formBuilder, task);
   }
 }

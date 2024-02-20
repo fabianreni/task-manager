@@ -3,30 +3,6 @@
         <h3 class="text-xl font-semibold">Create task</h3>
     </div>
 
-    <div class="p-4 md:p-5 space-y-4">
-        <form (ngSubmit)="onSubmit()">
-            <div class="mb-4 ">
-                <span>Title: </span>
-                <input type="text" name="title" [(ngModel)]="task.title" placeholder="Title" required>
-            </div>
-            <div class="mb-4">
-                <span>Description: </span>
-                <input type="text" name="description" [(ngModel)]="task.description" placeholder="Description" required>
-            </div>
-
-            <div class="mb-4">
-                <span>Status: </span>
-                <select name="status" [(ngModel)]="task.status" disabled>
-                    <ng-container *ngFor="let status of taskStatuses">
-                        <option [value]="status.id">{{status.name}}</option>
-                    </ng-container>
-                </select>
-            </div>
-
-            <div class="flex items-end justify-end p-4 md:p-5">
-                <button type="button" (click)="onClose()">Close</button>
-                <button type="submit" class="ml-4" [disabled]="form.invalid">Save</button>
-            </div>
-        </form>
-    </div>
+    <app-create-and-edit-task-presentation [presentation]="taskPresentation"
+        (task)="onTaskChanged($event)"></app-create-and-edit-task-presentation>
 </div>

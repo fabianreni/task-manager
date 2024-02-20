@@ -1,0 +1,29 @@
+<div class="p-4 md:p-5 space-y-4">
+    <ng-container *ngIf="presentation">
+        <form (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+                <label>Title: </label>
+                <input type="text" name="title" [(ngModel)]="presentation.task.title" placeholder="Title" required>
+            </div>
+            <div class="mb-4">
+                <label>Description: </label>
+                <input type="text" name="description" [(ngModel)]="presentation.task.description"
+                    placeholder="Description" required>
+            </div>
+
+            <div *ngIf="presentation.task.id" class="mb-4">
+                <label>Status: </label>
+                <select name="status" [(ngModel)]="presentation.task.status">
+                    <ng-container *ngFor="let status of taskStatuses">
+                        <option [value]="status.id">{{status.name}}</option>
+                    </ng-container>
+                </select>
+            </div>
+
+            <div class="flex items-end justify-end p-4 md:p-5">
+                <button type="button" (click)="onClose()">Close</button>
+                <button type="submit" class="ml-4" [disabled]="presentation.form.invalid">Save</button>
+            </div>
+        </form>
+    </ng-container>
+</div>

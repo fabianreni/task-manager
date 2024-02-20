@@ -5,21 +5,21 @@ import { CommonModule } from '@angular/common';
 
 import { Task, TaskStatus, TaskStatusPresentation } from '../services/task.model';
 import { TaskManagementService } from '../services/task-management.service';
+import { CreateAndEditTaskPresentation } from '../create-and-edit-task-presentation/create-and-edit-task-presentation.model';
+import { CreateAndEditTaskPresentationComponent } from '../create-and-edit-task-presentation/create-and-edit-task-presentation.component';
 
 @Component({
   selector: 'app-create-task-dialog',
   standalone: true,
   imports: [
-    FormsModule,
-    CommonModule],
+    CommonModule,
+    CreateAndEditTaskPresentationComponent],
   templateUrl: './create-task-dialog.component.html',
   styleUrl: './create-task-dialog.component.scss'
 })
 export class CreateTaskDialogComponent implements OnInit {
-  task: Task = new Task();
-  form!: FormGroup;
 
-  taskStatuses: TaskStatusPresentation[] = [];
+  taskPresentation!: CreateAndEditTaskPresentation;
 
   constructor(
     private dialogRef: MatDialogRef<CreateTaskDialogComponent>,
@@ -28,32 +28,29 @@ export class CreateTaskDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initializeTaskForm();
-    this.initializeTaskStatuses();
+    this.initializeTask();
   }
 
-  onSubmit(): void {
-    this.taskManagementService.createTask(this.task);
+  onTaskChanged(task: Task | null): void {
+    if (task === null) {
+      this.onClose();
+      return;
+    }
+
+    this.onSubmit(task);
+  }
+
+  private onSubmit(task: Task): void {
+    this.taskManagementService.createTask(task);
     this.onClose();
   }
 
-  onClose(): void {
+  private onClose(): void {
     this.dialogRef.close();
   }
 
-  private initializeTaskForm(): void {
-    this.form = this.formBuilder.group({
-      title: this.task.title,
-      description: this.task.description,
-      status: this.task.status
-    });
-  }
-
-  private initializeTaskStatuses(): void {
-    const createStatus = new TaskStatusPresentation(TaskStatus.Created, 'Created');
-    const pendingStatus = new TaskStatusPresentation(TaskStatus.Pending, 'Pending');
-    const completedStatus = new TaskStatusPresentation(TaskStatus.Completed, 'Completed');
-
-    this.taskStatuses.push(createStatus, pendingStatus, completedStatus);
+  private initializeTask(): void {
+    const task = new Task()
+    this.taskPresentation = new CreateAndEditTaskPresentation(this.formBuilder, task);
   }
 }
