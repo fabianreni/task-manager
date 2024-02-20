@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 import { CreateAndEditTaskPresentation } from './create-and-edit-task-presentation.model';
-import { Task, TaskStatus, Status } from '../services/task.model';
+import { Task, TaskStatus, TaskStatusType } from '../services/task.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -33,9 +33,9 @@ export class CreateAndEditTaskPresentationComponent {
   }
 
   private initializeTaskStatuses(): void {
-    const createStatus = new TaskStatus(Status.Created, 'Created');
-    const pendingStatus = new TaskStatus(Status.Pending, 'Pending');
-    const completedStatus = new TaskStatus(Status.Completed, 'Completed');
+    const createStatus = new TaskStatus(TaskStatusType.Created, 'Created');
+    const pendingStatus = new TaskStatus(TaskStatusType.Pending, 'Pending');
+    const completedStatus = new TaskStatus(TaskStatusType.Completed, 'Completed');
 
     this.taskStatuses.push(createStatus, pendingStatus, completedStatus);
   }

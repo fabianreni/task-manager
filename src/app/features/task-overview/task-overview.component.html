@@ -32,6 +32,11 @@
                 <td mat-cell *matCellDef="let task">{{ task.description }}</td>
             </ng-container>
 
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let task"><app-task-status [status]="task.status"></app-task-status></td>
+            </ng-container>
+
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let task">
@@ -50,9 +55,10 @@
             </ng-container>
 
             <tr mat-header-row class="bg-gray-800 text-white"
-                *matHeaderRowDef="['id', 'title', 'description', 'actions']">
+                *matHeaderRowDef="['id', 'title', 'description', 'status', 'actions']">
             </tr>
-            <tr mat-row class="text-gray-700" *matRowDef="let row; columns: ['id', 'title', 'description', 'actions']">
+            <tr mat-row class="text-gray-700"
+                *matRowDef="let row; columns: ['id', 'title', 'description', 'status', 'actions']">
             </tr>
         </table>
     </ng-template>

@@ -1,0 +1,14 @@
+<ng-container [ngSwitch]="status">
+    <div *ngSwitchCase="statuses.Created" class="flex items-center">
+        <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+        <span class="ml-2">Created</span>
+    </div>
+    <div *ngSwitchCase="statuses.Pending" class="flex items-center">
+        <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+        <span class="ml-2">Pending</span>
+    </div>
+    <div *ngSwitchCase="statuses.Completed" class="flex items-center">
+        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+        <span class="ml-2">Completed</span>
+    </div>
+</ng-container>

@@ -12,6 +12,7 @@ import { TaskManagementService } from '../services/task-management.service';
 import { DeleteTaskDialogComponent } from '../delete-task-dialog/delete-task-dialog.component';
 import { EditTaskDialogComponent } from '../edit-task-dialog/edit-task-dialog.component';
 import { ViewTaskDialogComponent } from '../view-task-dialog/view-task-dialog.component';
+import { TaskStatusComponent } from '../../shared/status/status.component';
 @Component({
   selector: 'app-task-overview',
   standalone: true,
@@ -19,14 +20,14 @@ import { ViewTaskDialogComponent } from '../view-task-dialog/view-task-dialog.co
     MatDialogModule,
     MatIconModule,
     MatTableModule,
-    CommonModule
+    CommonModule,
+    TaskStatusComponent
   ],
   templateUrl: './task-overview.component.html',
   styleUrl: './task-overview.component.scss'
 })
 export class TaskOverviewComponent {
   tasks$: Observable<Task[]>;
-
   constructor(
     private dialog: MatDialog,
     private taskManagementService: TaskManagementService
