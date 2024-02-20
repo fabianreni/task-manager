@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 import { CreateAndEditTaskPresentation } from './create-and-edit-task-presentation.model';
-import { Task, TaskStatus, TaskStatusPresentation } from '../services/task.model';
+import { Task, TaskStatus, Status } from '../services/task.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -18,7 +18,7 @@ export class CreateAndEditTaskPresentationComponent {
   @Input() presentation!: CreateAndEditTaskPresentation;
   @Output() task: EventEmitter<Task | null> = new EventEmitter<Task | null>();
 
-  taskStatuses: TaskStatusPresentation[] = [];
+  taskStatuses: TaskStatus[] = [];
 
   ngOnInit(): void {
     this.initializeTaskStatuses();
@@ -33,9 +33,9 @@ export class CreateAndEditTaskPresentationComponent {
   }
 
   private initializeTaskStatuses(): void {
-    const createStatus = new TaskStatusPresentation(TaskStatus.Created, 'Created');
-    const pendingStatus = new TaskStatusPresentation(TaskStatus.Pending, 'Pending');
-    const completedStatus = new TaskStatusPresentation(TaskStatus.Completed, 'Completed');
+    const createStatus = new TaskStatus(Status.Created, 'Created');
+    const pendingStatus = new TaskStatus(Status.Pending, 'Pending');
+    const completedStatus = new TaskStatus(Status.Completed, 'Completed');
 
     this.taskStatuses.push(createStatus, pendingStatus, completedStatus);
   }

@@ -1,9 +1,9 @@
 import { Component, OnInit, signal } from '@angular/core';
-
-import { TaskSummary } from '../services/task.model';
-import { TaskDashboardService } from '../services/task-dashboard.service';
 import { CommonModule } from '@angular/common';
+
+import { TaskDashboardService } from '../services/task-dashboard.service';
 import { OnDestroyAdapter } from '../../shared/on-destroy-adapter';
+import { TaskSummary } from '../services/task-summary.model';
 
 @Component({
   selector: 'app-task-dashboard',

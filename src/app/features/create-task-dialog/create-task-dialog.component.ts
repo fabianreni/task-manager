@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 
-import { Task, TaskStatus, TaskStatusPresentation } from '../services/task.model';
+import { Task } from '../services/task.model';
 import { TaskManagementService } from '../services/task-management.service';
 import { CreateAndEditTaskPresentation } from '../create-and-edit-task-presentation/create-and-edit-task-presentation.model';
 import { CreateAndEditTaskPresentationComponent } from '../create-and-edit-task-presentation/create-and-edit-task-presentation.component';

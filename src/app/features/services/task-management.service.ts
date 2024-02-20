@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Task } from './task.model';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
+
+import { Task } from './task.model';
 import { TaskDashboardService } from './task-dashboard.service';
 
 @Injectable({
@@ -8,6 +9,7 @@ import { TaskDashboardService } from './task-dashboard.service';
 })
 export class TaskManagementService {
   tasks$: Observable<Task[]>;
+
   private tasks: Task[] = [];
   private tasksSubject: Subject<Task[]> = new ReplaySubject<Task[]>(1);
 
