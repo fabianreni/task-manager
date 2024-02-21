@@ -70,6 +70,7 @@ export class TaskManagementService {
 
     this.tasks.push(task1, task2);
     this.tasksSubject.next(this.tasks);
+    this.setTaskSummary();
   }
 
   private setTaskSummary(): void {
