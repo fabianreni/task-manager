@@ -25,6 +25,7 @@ export class CreateAndEditTaskPresentationComponent {
   }
 
   onSubmit(): void {
+    this.presentation.task.status = + this.presentation.task.status;
     this.task.emit(this.presentation.task);
   }
 

@@ -2,7 +2,7 @@ export class Task {
     id: number | null;
     title: string | null;
     description: string | null;
-    status: TaskStatusType | null;
+    status: TaskStatusType;
 
     constructor() {
         this.id = null;
