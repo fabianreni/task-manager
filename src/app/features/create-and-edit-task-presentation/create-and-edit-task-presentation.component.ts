@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 import { CreateAndEditTaskPresentation } from './create-and-edit-task-presentation.model';
 import { Task, TaskStatus, TaskStatusType } from '../services/task.model';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-create-and-edit-task-presentation',

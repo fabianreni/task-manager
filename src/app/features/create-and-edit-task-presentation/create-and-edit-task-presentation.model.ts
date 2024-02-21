@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Task } from "../services/task.model";
 
 export class CreateAndEditTaskPresentation {
@@ -8,11 +8,11 @@ export class CreateAndEditTaskPresentation {
     constructor(
         private formBuilder: FormBuilder,
         task: Task) {
-        this.task = Object.assign({}, task);
+        this.task = task;
         this.form = this.formBuilder.group({
-            title: this.task.title,
-            description: this.task.description,
-            status: this.task.status
+            title: [task.title, Validators.required],
+            description: [task.description, Validators.required],
+            status: task.status
         });
     }
 }
