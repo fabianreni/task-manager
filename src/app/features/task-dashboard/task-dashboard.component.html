@@ -2,9 +2,9 @@
     <h1 class="text-xl font-bold">
         Task dashboard</h1>
 </div>
-<div class="flex  h-full">
-    <div class="w-1/2">
-        <div class="w-96 bg-gray-100 rounded-md p-4 shadow-md">
+<div class=" bg-white p-4 shadow-md">
+    <ng-container *ngIf="hasTasks; else noTasks">
+        <div class="w-1/2 mt-4 ml-4 bg-gray-100 rounded-md p-4 shadow-md">
             <div class="flex items-center mb-4">
                 <div class="w-1/2">Total Tasks</div>
                 <div class="w-1/2 text-right"> {{taskSummary().totalTasksCount}}</div>
@@ -39,5 +39,10 @@
                     [style.width.%]="(taskSummary().completedTasksCount / taskSummary().totalTasksCount) * 100"></div>
             </div>
         </div>
-    </div>
+    </ng-container>
 </div>
+<ng-template #noTasks>
+    <div class="flex items-center justify-center">
+        <span>No task to show</span>
+    </div>
+</ng-template>

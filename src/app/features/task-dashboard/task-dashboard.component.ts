@@ -9,13 +9,15 @@ import { TaskSummary } from '../services/task-summary.model';
   selector: 'app-task-dashboard',
   standalone: true,
   imports: [
-    CommonModule],
+    CommonModule
+  ],
   templateUrl: './task-dashboard.component.html',
   styleUrl: './task-dashboard.component.scss'
 })
 export class TaskDashboardComponent extends OnDestroyAdapter implements OnInit {
   taskSummary = signal(new TaskSummary());
 
+  hasTasks: boolean = false;
   constructor(
     private taskDashboardService: TaskDashboardService) {
     super();
@@ -28,6 +30,12 @@ export class TaskDashboardComponent extends OnDestroyAdapter implements OnInit {
   private getSummary(): void {
     const subscription = this.taskDashboardService.getTasksSummary().subscribe((tasksSummary: TaskSummary) => {
       this.taskSummary.set(tasksSummary);
+      if (tasksSummary.totalTasksCount > 0) {
+        this.hasTasks = true;
+      }
+      else {
+        this.hasTasks = false;
+      }
     });
 
     this.subSink.add(subscription);
