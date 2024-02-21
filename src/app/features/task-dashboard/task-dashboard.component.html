@@ -5,36 +5,35 @@
 <div class="bg-white p-4 shadow-md">
     <ng-container *ngIf="hasTasks; else noTasks">
         <div class="sm:w-full md:w-1/2 mt-4 md:mt-0 md:ml-4 bg-gray-100 rounded-md p-4 shadow-md">
-
-            <div class="flex flex-col md:flex-row items-center mb-4">
-                <div class="w-full md:w-1/2 md:text-right mb-2 md:mb-0">Total Tasks</div>
-                <div class="w-full md:w-1/2 text-right">{{taskSummary().totalTasksCount}}</div>
+            <div class="flex flex-col md:flex-row  mb-2 mt-2">
+                <div class="w-full md:w-1/2  mb-2 md:mb-0">Total Tasks</div>
+                <div class="w-full md:w-1/2 ">{{taskSummary().totalTasksCount}}</div>
             </div>
             <div class="h-2 bg-gray-800 rounded-lg"
                 [style.width.%]="(taskSummary().totalTasksCount/taskSummary().totalTasksCount) * 100"></div>
 
-            <div class="flex flex-col md:flex-row items-center mb-4">
-                <div class="w-full md:w-1/2 md:text-right mb-2 md:mb-0">Created</div>
-                <div class="w-full md:w-1/2 text-right">{{taskSummary().createdTasksCount}}</div>
+            <div class="flex flex-col md:flex-row  mb-2 mt-2">
+                <div class="w-full md:w-1/2 mb-2 md:mb-0">Created</div>
+                <div class="w-full md:w-1/2 ">{{taskSummary().createdTasksCount}}</div>
             </div>
             <div class="w-full h-2 bg-gray-300 rounded-md">
                 <div class="h-2 bg-blue-500 rounded-lg"
                     [style.width.%]="(taskSummary().createdTasksCount / taskSummary().totalTasksCount) * 100"></div>
             </div>
 
-            <div class="flex flex-col md:flex-row items-center mb-4">
-                <div class="w-full md:w-1/2 md:text-right mb-2 md:mb-0">Pending</div>
-                <div class="w-full md:w-1/2 text-right">{{ taskSummary().pendingTasksCount }}</div>
+            <div class="flex flex-col md:flex-row  mb-2 mt-2">
+                <div class="w-full md:w-1/2 mb-2 md:mb-0">Pending</div>
+                <div class="w-full md:w-1/2 ">{{ taskSummary().pendingTasksCount }}</div>
             </div>
-            <div class="flex flex-col md:flex-row items-center mb-4">
+            <div class="flex flex-col md:flex-row items-center mb-4 mt-2">
                 <div class="h-2 bg-yellow-500 rounded-lg"
                     [style.width.%]="(taskSummary().pendingTasksCount / taskSummary().totalTasksCount) * 100"></div>
             </div>
 
 
-            <div class="flex flex-col md:flex-row items-center mb-4">
-                <div class="w-full md:w-1/2 md:text-right mb-2 md:mb-0">Completed</div>
-                <div class="w-full md:w-1/2 text-right">{{ taskSummary().completedTasksCount }}</div>
+            <div class="flex flex-col md:flex-row mb-2 mt-2">
+                <div class="w-full md:w-1/2  mb-2 md:mb-0">Completed</div>
+                <div class="w-full md:w-1/2 ">{{ taskSummary().completedTasksCount }}</div>
             </div>
             <div class="w-full h-2 bg-gray-300 rounded-md">
                 <div class="h-2 bg-green-500 rounded-lg"
