@@ -17,63 +17,65 @@
         </div>
     </ng-container>
     <ng-template #table>
-        <table mat-table class="min-w-full bg-white shadow-md rounded" [dataSource]="tasks$">
-            <ng-container matColumnDef="id">
-                <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
-                    *matHeaderCellDef>ID</th>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">{{
-                    task.id }}</td>
-            </ng-container>
+        <div class="overflow-x-auto">
+            <table mat-table class="min-w-full bg-white shadow-md rounded" [dataSource]="tasks$">
+                <ng-container matColumnDef="id">
+                    <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                        *matHeaderCellDef>ID</th>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">{{
+                        task.id }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="title">
-                <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
-                    *matHeaderCellDef>Title</th>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">{{
-                    task.title }}</td>
-            </ng-container>
+                <ng-container matColumnDef="title">
+                    <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                        *matHeaderCellDef>Title</th>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">{{
+                        task.title }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="description">
-                <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
-                    *matHeaderCellDef>Description</th>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">{{
-                    task.description }}</td>
-            </ng-container>
+                <ng-container matColumnDef="description">
+                    <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                        *matHeaderCellDef>Description</th>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">{{
+                        task.description }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="status">
-                <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
-                    *matHeaderCellDef>Status</th>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">
-                    <app-task-status [status]="task.status"></app-task-status>
-                </td>
-            </ng-container>
+                <ng-container matColumnDef="status">
+                    <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                        *matHeaderCellDef>Status</th>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">
+                        <app-task-status [status]="task.status"></app-task-status>
+                    </td>
+                </ng-container>
 
-            <ng-container matColumnDef="actions">
-                <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
-                    *matHeaderCellDef>Actions</th>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">
-                    <button class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
-                        (click)="openEditDialog(task)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
+                <ng-container matColumnDef="actions">
+                    <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                        *matHeaderCellDef>Actions</th>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">
+                        <button class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+                            (click)="openEditDialog(task)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
 
-                    <button class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
-                        (click)="openDetailDialog(task)">
-                        <mat-icon>visibility</mat-icon>
-                    </button>
+                        <button class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+                            (click)="openDetailDialog(task)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
 
-                    <button class="text-red-600 hover:text-red-900 focus:outline-none focus:text-red-900"
-                        (click)="openDeleteDialog(task)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
+                        <button class="text-red-600 hover:text-red-900 focus:outline-none focus:text-red-900"
+                            (click)="openDeleteDialog(task)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
 
-            <tr class="bg-gray-200" mat-header-row
-                *matHeaderRowDef="['id', 'title', 'description', 'status', 'actions']">
-            </tr>
-            <tr class="border-b border-gray-200" mat-row
-                *matRowDef="let row; columns: ['id', 'title', 'description', 'status', 'actions']">
-            </tr>
-        </table>
+                <tr class="bg-gray-200" mat-header-row
+                    *matHeaderRowDef="['id', 'title', 'description', 'status', 'actions']">
+                </tr>
+                <tr class="border-b border-gray-200" mat-row
+                    *matRowDef="let row; columns: ['id', 'title', 'description', 'status', 'actions']">
+                </tr>
+            </table>
+        </div>
     </ng-template>
 </div>
