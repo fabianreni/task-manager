@@ -8,7 +8,7 @@ export class CreateAndEditTaskPresentation {
     constructor(
         private formBuilder: FormBuilder,
         task: Task) {
-        this.task = task;
+        this.task = Object.assign({}, task);
         this.form = this.formBuilder.group({
             title: [task.title, Validators.required],
             description: [task.description, Validators.required],
