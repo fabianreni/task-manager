@@ -1,62 +1,77 @@
 <div class="bg-gray-400 py-2 px-2 text-left text-white">
     <h1 class="text-xl font-bold">Task overview</h1>
 </div>
+
 <div class="m-4 bg-white p-4 shadow-md">
-    <button mat-icon-button (click)="openCreateDialog()">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
+        (click)="openCreateDialog()">
         <div class="flex items-center justify-center">
-            <mat-icon>add</mat-icon>
-            <span> Create task</span>
+            <mat-icon class="mr-2">add</mat-icon>
+            <span>Create task</span>
         </div>
     </button>
 
     <ng-container *ngIf="!(tasks$ | async) as tasks ; else table">
         <div class="flex items-center justify-center">
-            <span>No tasks added, Please create task</span>
+            <span class="text-gray-700">No tasks added, Please create task</span>
         </div>
     </ng-container>
     <ng-template #table>
         <table mat-table class="min-w-full bg-white shadow-md rounded" [dataSource]="tasks$">
             <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef>ID</th>
-                <td mat-cell *matCellDef="let task">{{ task.id }}</td>
+                <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                    *matHeaderCellDef>ID</th>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">{{
+                    task.id }}</td>
             </ng-container>
 
             <ng-container matColumnDef="title">
-                <th mat-header-cell *matHeaderCellDef>Title</th>
-                <td mat-cell *matCellDef="let task">{{ task.title }}</td>
+                <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                    *matHeaderCellDef>Title</th>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">{{
+                    task.title }}</td>
             </ng-container>
 
             <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef>Description</th>
-                <td mat-cell *matCellDef="let task">{{ task.description }}</td>
+                <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                    *matHeaderCellDef>Description</th>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">{{
+                    task.description }}</td>
             </ng-container>
 
             <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef>Status</th>
-                <td mat-cell *matCellDef="let task"><app-task-status [status]="task.status"></app-task-status></td>
+                <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                    *matHeaderCellDef>Status</th>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">
+                    <app-task-status [status]="task.status"></app-task-status>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef>Actions</th>
-                <td mat-cell *matCellDef="let task">
-                    <button mat-icon-button (click)="openEditDialog(task)">
+                <th class="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                    *matHeaderCellDef>Actions</th>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500" *matCellDef="let task">
+                    <button class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+                        (click)="openEditDialog(task)">
                         <mat-icon>edit</mat-icon>
                     </button>
 
-                    <button mat-icon-button (click)="openDetailDialog(task)">
+                    <button class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+                        (click)="openDetailDialog(task)">
                         <mat-icon>visibility</mat-icon>
                     </button>
 
-                    <button mat-icon-button (click)="openDeleteDialog(task)">
+                    <button class="text-red-600 hover:text-red-900 focus:outline-none focus:text-red-900"
+                        (click)="openDeleteDialog(task)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>
             </ng-container>
 
-            <tr mat-header-row class="bg-gray-800 text-white"
+            <tr class="bg-gray-200" mat-header-row
                 *matHeaderRowDef="['id', 'title', 'description', 'status', 'actions']">
             </tr>
-            <tr mat-row class="text-gray-700"
+            <tr class="border-b border-gray-200" mat-row
                 *matRowDef="let row; columns: ['id', 'title', 'description', 'status', 'actions']">
             </tr>
         </table>

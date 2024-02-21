@@ -64,7 +64,7 @@ export class TaskManagementService {
 
 
     const task2 = new Task();
-    task1.id = 2;
+    task2.id = 2;
     task2.title = "Add routing to project"
     task2.description = "Create routing module and add somerouting";
 
